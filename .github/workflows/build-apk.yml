@@ -38,7 +38,7 @@ jobs:
 
       - name: Init Capacitor project
         run: |
-          npx cap init "Island Survival" "com.island.survival" --web-dir . --yes
+          npx cap init "Island Survival" "com.island.survival" --web-dir .
           npx cap add android
           npx cap sync
 
