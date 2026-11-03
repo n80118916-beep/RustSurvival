@@ -36,9 +36,14 @@ jobs:
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
 
+      - name: Prepare web assets folder
+        run: |
+          mkdir -p www
+          cp index.html main.js manifest.json www/
+
       - name: Init Capacitor project
         run: |
-          npx cap init "Island Survival" "com.island.survival" --web-dir .
+          npx cap init "Island Survival" "com.island.survival" --web-dir www
           npx cap add android
           npx cap sync
 
