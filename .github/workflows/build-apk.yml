@@ -1,26 +1,51 @@
-name: Build APK from HTML
+name: Build Android APK
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Позволяет запускать сборку вручную из вкладки Actions
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build APK
-        uses: darkshredder/web-to-app-action@main
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          build-folder-path: "." # Папка с твоими index.html и main.js (корень)
-          app-name: "Island Survival"
-          output-folder-path: "apk-output"
+          node-version: '20'
 
-      - name: Upload APK to Artifacts
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Capacitor
+        run: |
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+
+      - name: Init Capacitor project
+        run: |
+          npx cap init "Island Survival" "com.island.survival" --web-dir . --yes
+          npx cap add android
+          npx cap sync
+
+      - name: Build Debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: game-apk
-          path: apk-output/
+          name: island-survival-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
