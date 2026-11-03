@@ -1,0 +1,10 @@
+node_modules/
+package.json
+package-lock.json
+android/
+ios/
+.gradle/
+build/
+*.apk
+*.aab
+.DS_Store
