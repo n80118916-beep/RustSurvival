@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#87ceeb">
+<link rel="manifest" href="manifest.json">
+<title>Island Survival</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
+  html,body{margin:0;padding:0;overflow:hidden;background:#000;touch-action:none;font-family:sans-serif;height:100%}
+  canvas{display:block;position:fixed;inset:0}
+  #ui{position:fixed;inset:0;pointer-events:none;z-index:10}
+  #joystick{position:absolute;bottom:110px;left:25px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.45);pointer-events:auto;touch-action:none}
+  #stick{position:absolute;top:50%;left:50%;width:55px;height:55px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(255,255,255,.65)}
+  #hotbar{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);display:flex;gap:6px;pointer-events:auto}
+  .slot{width:52px;height:52px;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.5);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px}
+  .slot.active{border-color:#ffd700;background:rgba(255,215,0,.25);box-shadow:0 0 10px rgba(255,215,0,.6)}
+  #hint{position:absolute;top:16px;left:50%;transform:translateX(-50%);color:#fff;background:rgba(0,0,0,.55);padding:6px 14px;border-radius:8px;font-size:12px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="ui">
+  <div id="hint">Джойстик слева · Свайп справа — обзор · Собирай камни и факелы</div>
+  <div id="joystick"><div id="stick"></div></div>
+  <div id="hotbar"></div>
+</div>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+</script>
+<script type="module" src="main.js"></script>
+</body>
+  </html>
