@@ -1,0 +1,26 @@
+name: Build APK from HTML
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Позволяет запускать сборку вручную из вкладки Actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build APK
+        uses: darkshredder/web-to-app-action@main
+        with:
+          build-folder-path: "." # Папка с твоими index.html и main.js (корень)
+          app-name: "Island Survival"
+          output-folder-path: "apk-output"
+
+      - name: Upload APK to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-apk
+          path: apk-output/
